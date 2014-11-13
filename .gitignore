@@ -1,0 +1,11 @@
+*.gem
+*.rbc
+rdoc
+
+# YARD artifacts
+.yardoc
+_yardoc
+doc/
+.DS_Store
+.floo
+.flooignore
