@@ -1,6 +1,8 @@
 *.gem
 *.rbc
 rdoc
+exec/
+test/
 
 # YARD artifacts
 .yardoc

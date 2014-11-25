@@ -2,4 +2,9 @@ source 'http://rubygems.org'
 ruby '2.1.4'
 
 gem 'god'
-
+gem 'mkfifo'
+gem 'byebug'
+gem 'rake'
+gem 'rdoc'
+gem 'sequel'
+gem 'rspec'
