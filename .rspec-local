@@ -1,3 +1,4 @@
 -I lib
 -I spec
 --default-path spec/unit
+--color

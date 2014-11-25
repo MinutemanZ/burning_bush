@@ -1,4 +1,5 @@
 require 'rspec/expectations'
 require 'byebug'
 
-LIB_ROOT = File.expand_path '../lib', File.dirname(__FILE__)
+PROJECT_ROOT = File.expand_path '..', File.dirname(__FILE__)
+LIB_ROOT = File.join PROJECT_ROOT, File.dirname(__FILE__)

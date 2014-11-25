@@ -4,7 +4,7 @@ require 'fifo'
 
 describe Fifo do
   before :each do
-    stub_const("Fifo::PATH", File.expand_path('../../test/fifo', File.dirname(__FILE__)))
+    stub_const("Fifo::PATH", File.join(PROJECT_ROOT, 'test/fifo'))
     @fifo_dir = File.dirname(Fifo::PATH)
   end
 
