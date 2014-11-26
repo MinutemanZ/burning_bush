@@ -3,6 +3,7 @@
 rdoc
 exec/
 test/
+.env
 
 # YARD artifacts
 .yardoc

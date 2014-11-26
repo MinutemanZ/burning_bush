@@ -1,4 +1,5 @@
-$:.unshift File.dirname(__FILE__) + "/lib"
+$:.unshift ENV.fetch('AIO_RUBY_DIR')
+$:.unshift File.join(File.dirname(__FILE__), "lib")
 
 require 'rubygems'
 require 'bundler'
