@@ -6,6 +6,9 @@ module HardwareInterface
 
     class BadDrivers < StandardError; end
 
+    attr_reader :name, :serial_number, :index,
+      :num_dio_bytes, :num_counters, :product_id
+
     def initialize(**options)
       @name = options[:name] || ""
       @serial_number = options[:serial_number] || 0
@@ -18,7 +21,7 @@ module HardwareInterface
     def set_zone(zone,value)
       super
       self.get_lock
-      aiousb_value = value ? AIOUSB::AIOUSB_TRUE : AIOUSB::AIOUSB_FALSE
+      aiousb_value = !value ? AIOUSB::AIOUSB_TRUE : AIOUSB::AIOUSB_FALSE
       AIOUSB.DIO_Write1(self.index, zone, aiousb_value)
       self.release_lock
     end

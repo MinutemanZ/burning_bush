@@ -7,12 +7,12 @@ class ZoneSetter
 
   class << self
     def set_zone(zone,value)
-      unless /^\d+$/.match(zone) && /^\d+$/.match(value)
+      unless /^\d+$/.match(zone.to_s) && /^\d+$/.match(value.to_s)
         raise InvalidInput, "[#{zone},#{value}] received.  " \
           "Expected [zone value] where zone and value are integers."
       end
       zone = zone.to_i
-      value = value != "0"
+      value = value.to_i != 0
       unless 0 <= zone && zone < 16
         raise InvalidInput,
           "zone must be between 0-15 inclusive. #{zone} received."
