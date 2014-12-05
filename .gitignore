@@ -4,6 +4,9 @@ rdoc
 exec/
 test/
 .env
+bin/
+build/
+burning_bush_daemon
 
 # YARD artifacts
 .yardoc
