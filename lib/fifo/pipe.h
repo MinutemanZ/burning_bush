@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <cstdio>
+#include <stdexcept>
 
 namespace BurningBush {
   namespace Fifo {
@@ -17,8 +18,10 @@ namespace BurningBush {
       bool get_command(int &zone, bool &on);
 
       class Exception : public std::runtime_error {
-        // using necessary because of explicit keywords in contstructors
-        using std::runtime_error::runtime_error;
+      public:
+        explicit Exception(const std::string& what_arg)
+        :std::runtime_error(what_arg)
+        {}
       };
     private:
       size_t parse_position;

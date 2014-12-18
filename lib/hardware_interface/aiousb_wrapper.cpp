@@ -9,7 +9,7 @@
 namespace BurningBush {
   namespace HardwareInterface {
     AiousbWrapper::AiousbWrapper() {
-      buffer.fill(0xff);
+      memset(buffer, 0xff, sizeof(buffer));
       check_aiousb_result(AIOUSB::AIOUSB_Init());
     }
 
@@ -36,8 +36,7 @@ namespace BurningBush {
         << std::hex << std::setfill('0') << std::setw(2)
         << std::hex << (static_cast<int>(buffer[1]))
         << (static_cast<int>(buffer[0])) << std::endl;
-      unsigned char *data = buffer.data();
-      unsigned long result = AIOUSB::DIO_WriteAll(AIOUSB::diFirst, data);
+      unsigned long result = AIOUSB::DIO_WriteAll(AIOUSB::diFirst, buffer);
       if(result == AIOUSB::AIOUSB_SUCCESS) {
         sleep(1); // Only send one command per second
       } else {
