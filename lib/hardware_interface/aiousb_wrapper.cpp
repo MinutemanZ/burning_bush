@@ -117,9 +117,7 @@ namespace BurningBush {
           break;
       }
       message << std::endl;
-      std::string message_string = message.str();
-      // throw std::runtime_error(message_string);
-      throw AiousbWrapper::Exception(message_string);
+      throw AiousbWrapper::Exception(message.str());
     }
   }
 }

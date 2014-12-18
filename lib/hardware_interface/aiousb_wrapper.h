@@ -1,5 +1,5 @@
-#ifndef __BURNING_BUSH_AIOUSB_H__
-#define __BURNING_BUSH_AIOUSB_H__
+#ifndef __BURNING_BUSH_AIOUSB_WRAPPER_H__
+#define __BURNING_BUSH_AIOUSB_WRAPPER_H__
 
 #include <array>
 #include <stdexcept>
