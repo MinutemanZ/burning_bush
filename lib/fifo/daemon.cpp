@@ -15,15 +15,14 @@ int main(int /*argc*/, char **/*argv*/) {
 
   int zone;
   bool status;
-  BurningBush::Fifo::Pipe pipe;
-  while(pipe.get_command(zone, status)) {
-    std::cout << "Zone " << zone << (status ? " on" : " off") << std::endl;
+  while(true) {
+    BurningBush::Fifo::Pipe pipe;
+    while(pipe.get_command(zone, status)) {
+      std::cout << "Zone " << zone << (status ? " on" : " off") << std::endl;
+      interface.set_buffer(zone,status);
+    }
+    interface.write_zones();
   }
-
-  // if(argc < 2) {
-  //   std::cerr << "Usage: " << argv[0] << " ZONE {0|1}";
-  // }
-  // interface.set_zone(atoi(argv[1]), atoi(argv[2]));
 
   return 0;
 }

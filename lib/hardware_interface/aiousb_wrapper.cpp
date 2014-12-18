@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
+#include <stdio.h>
 
 #include "aiousb.h"
 #include "hardware_interface/aiousb_wrapper.h"
@@ -14,12 +15,6 @@ namespace BurningBush {
 
     AiousbWrapper::~AiousbWrapper() {
       AIOUSB::AIOUSB_Exit();
-    }
-
-    void AiousbWrapper::set_zone(int zone, bool on) {
-      std::cout << "zone " << zone << (on?" on":" off") << std::endl;
-      set_buffer(zone, on);
-      set_hardware();
     }
 
     //***************************************************************
@@ -36,14 +31,16 @@ namespace BurningBush {
       }
     }
 
-    void AiousbWrapper::set_hardware() {
+    void AiousbWrapper::write_zones() {
       std::cout << "Setting hardware to "
         << std::hex << std::setfill('0') << std::setw(2)
         << std::hex << (static_cast<int>(buffer[1]))
         << (static_cast<int>(buffer[0])) << std::endl;
       unsigned char *data = buffer.data();
       unsigned long result = AIOUSB::DIO_WriteAll(AIOUSB::diFirst, data);
-      if(result != AIOUSB::AIOUSB_SUCCESS) {
+      if(result == AIOUSB::AIOUSB_SUCCESS) {
+        sleep(1); // Only send one command per second
+      } else {
         std::cerr << AIOUSB::AIOUSB_GetResultCodeAsString(result) << std::endl;
       }
     }

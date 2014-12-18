@@ -10,16 +10,15 @@ namespace BurningBush {
     public:
       AiousbWrapper();
       ~AiousbWrapper();
-      void set_zone(int zone, bool on);
 
       class Exception : public std::runtime_error {
         // using necessary because of explicit keywords in contstructors
         using std::runtime_error::runtime_error;
       };
-    private:
       void set_buffer(int zone, bool on);
-      void set_hardware();
+      void write_zones();
 
+    private:
       std::array<unsigned char,4> buffer;
     };
     void check_aiousb_result(unsigned long result);
