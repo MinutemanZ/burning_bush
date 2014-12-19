@@ -37,11 +37,10 @@ namespace BurningBush {
         << std::hex << (static_cast<int>(buffer[1]))
         << (static_cast<int>(buffer[0])) << std::endl;
       unsigned long result = AIOUSB::DIO_WriteAll(AIOUSB::diFirst, buffer);
-      if(result == AIOUSB::AIOUSB_SUCCESS) {
-        sleep(1); // Only send one command per second
-      } else {
+      if(result != AIOUSB::AIOUSB_SUCCESS) {
         std::cerr << AIOUSB::AIOUSB_GetResultCodeAsString(result) << std::endl;
       }
+      sleep(1); // Only send one command per second
     }
 
     /*

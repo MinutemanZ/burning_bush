@@ -12,7 +12,6 @@ namespace BurningBush {
 
       class Exception : public std::runtime_error {
       public:
-        // using necessary because of explicit keywords in contstructors
         explicit Exception(const std::string& what_arg)
         :std::runtime_error(what_arg)
         {}

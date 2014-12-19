@@ -8,17 +8,13 @@
 
 namespace BurningBush {
   namespace Fifo {
+
     Pipe::Pipe()
     : parse_position(0)
-    , input_handle(::fopen(get_path(), "r"))
-    , input_buffer(fileno(input_handle), std::ios::in)
-    , input_stream(&input_buffer)
+    , input_stream(get_path())
     {}
 
-    Pipe::~Pipe() {
-      ::fclose(input_handle);
-      input_handle = NULL;
-    }
+    Pipe::~Pipe() {}
 
     /*
     Reads the input buffer and extracts the zone and state information
