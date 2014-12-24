@@ -5,10 +5,7 @@
 #include "hardware_interface/aiousb_wrapper.h"
 #include "fifo/pipe.h"
 
-void terminate(unsigned long result=0);
-
-std::string get_fifo_path();
-void make_fifo(std::string path);
+void test_fifo();
 
 int main(int /*argc*/, char **/*argv*/) {
   BurningBush::HardwareInterface::AiousbWrapper interface;
@@ -27,14 +24,25 @@ int main(int /*argc*/, char **/*argv*/) {
   return 0;
 }
 
-std::string get_fifo_path() {
-  const char* env_path = std::getenv("BURNING_BUSH_ROOT");
-  if(env_path == NULL) {
-    std::cerr << "Run \"source .env\"";
-    exit(1);
-  }
-  std::string fifo_path = env_path;
-  fifo_path += "/exec/fifo";
+void print_fifo_status(FILE *file_h) {
+  std::cout << "Error: " << ferror(file_h) << std::endl;
+  std::cout << "eof: " << feof(file_h) << std::endl;
+}
 
-  return fifo_path;
+void test_fifo() {
+  while(true) {
+    std::cout << "Opening pipe" << std::endl;
+    FILE *file_h = fopen("exec/fifo", "r");
+
+    print_fifo_status(file_h);
+    char buffer[101];
+    fgets(buffer, 2, file_h);
+    std::cout << buffer << std::endl;
+    while(!feof(file_h)) {
+      fgets(buffer, 101, file_h);
+    }
+    print_fifo_status(file_h);
+
+    fclose(file_h);
+  }
 }

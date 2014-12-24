@@ -24,9 +24,15 @@ namespace BurningBush {
         :std::runtime_error(what_arg)
         {}
       };
+      enum ReadState {
+        BEFORE_ZONE = 0,
+        WITHIN_ZONE,
+        BEFORE_STATE,
+        WITHIN_STATE,
+        NUM_STATES
+      };
     private:
-      size_t parse_position;
-      std::ifstream input_stream;
+      FILE *file_h;
     };
     const char *get_path();
     void make_fifo(std::string path);
