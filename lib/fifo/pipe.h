@@ -33,6 +33,8 @@ namespace BurningBush {
       };
     private:
       FILE *file_h;
+
+      void clear();
     };
     const char *get_path();
     void make_fifo(std::string path);

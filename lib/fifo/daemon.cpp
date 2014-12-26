@@ -15,7 +15,7 @@ int main(int /*argc*/, char **/*argv*/) {
   while(true) {
     BurningBush::Fifo::Pipe pipe;
     while(pipe.get_command(zone, status)) {
-      std::cout << "Zone " << zone << (status ? " on" : " off") << std::endl;
+      std::cout << "Zone " << std::dec << zone << (status ? " on\n" : " off\n");
       interface.set_buffer(zone,status);
     }
     interface.write_zones();

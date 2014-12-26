@@ -18,6 +18,13 @@ namespace BurningBush {
       fclose(file_h);
     }
 
+    void Pipe::clear() {
+      while(!feof(file_h)) {
+        char buffer[1024];
+        fread(buffer,1,1024,file_h);
+      }
+    }
+
     void Pipe::evaluate_stream() {
       std::cout << "eof:" << feof(file_h) << std::endl;
       std::cout << "fail:" << ferror(file_h) << std::endl;
@@ -42,7 +49,7 @@ namespace BurningBush {
     */
     bool Pipe::get_command(int &zone, bool &on) {
       int state = BEFORE_ZONE;
-      char buffer[1001];
+      char buffer[1024];
       char *current = buffer;
       char *zone_pos = NULL;
       char *state_pos = NULL;
@@ -83,11 +90,15 @@ namespace BurningBush {
           return parse_string(zone_pos, state_pos, zone, on);
         default:
           std::cerr << "Error parsing command\n";
+          clear();
           return false;
         }
         ++current;
       }
-
+      if(!feof(file_h)) {
+        std::cerr << "Command too long\n";
+        clear();
+      }
       return false;
     }
 
