@@ -37,5 +37,7 @@ to build C/C++ libraries and the ruby wrappers.
 1. `cd burning_bush`
 1. `gem install bundler`
 1. `bundle install`
+1. Create `/etc/ld.so.conf.d/aiousb.conf` with the values of LD_LIBRARY_PATH in AIOUSB/AIOUSB/sourceme.sh
+1. Reboot
 
 Further install instructions will be added as the system gets built.
