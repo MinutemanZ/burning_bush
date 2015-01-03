@@ -16,8 +16,6 @@ God.watch do |w|
   w.env['BURNING_BUSH_LIB'] = w.env['BURNING_BUSH_ROOT'] + "/lib"
 
   w.name = "burning-bush"
-  w.log = PROJECT_ROOT + "/exec/log.txt"
   w.keepalive
   w.start = "su -l pi -c #{PROJECT_ROOT}/burning_bush_daemon"
-  puts "logging to #{w.log}"
 end
