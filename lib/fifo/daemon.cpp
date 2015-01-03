@@ -12,6 +12,8 @@ int main(int /*argc*/, char **/*argv*/) {
 
   int zone;
   bool status;
+  // Turn all zones off when starting up
+  interface.write_zones();
   while(true) {
     BurningBush::Fifo::Pipe pipe;
     while(pipe.get_command(zone, status)) {
