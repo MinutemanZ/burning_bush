@@ -5,6 +5,7 @@
 
 #include "aiousb.h"
 #include "hardware_interface/aiousb_wrapper.h"
+#include "logger.h"
 
 namespace BurningBush {
   namespace HardwareInterface {
@@ -32,6 +33,7 @@ namespace BurningBush {
     }
 
     void AiousbWrapper::write_zones() {
+      print_date();
       std::cout << "Setting hardware to "
         << std::hex << std::setfill('0') << std::setw(2)
         << std::hex << (static_cast<int>(buffer[1]))

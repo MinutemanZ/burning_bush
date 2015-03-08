@@ -4,6 +4,7 @@
 
 #include "hardware_interface/aiousb_wrapper.h"
 #include "fifo/pipe.h"
+#include "logger.h"
 
 void test_fifo();
 
@@ -17,6 +18,7 @@ int main(int /*argc*/, char **/*argv*/) {
   while(true) {
     BurningBush::Fifo::Pipe pipe;
     while(pipe.get_command(zone, status)) {
+      print_date();
       std::cout << "Zone " << std::dec << zone << (status ? " on\n" : " off\n");
       interface.set_buffer(zone,status);
     }
@@ -27,7 +29,9 @@ int main(int /*argc*/, char **/*argv*/) {
 }
 
 void print_fifo_status(FILE *file_h) {
+  print_date();
   std::cout << "Error: " << ferror(file_h) << std::endl;
+  print_date();
   std::cout << "eof: " << feof(file_h) << std::endl;
 }
 
