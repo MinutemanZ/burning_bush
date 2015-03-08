@@ -18,4 +18,5 @@ God.watch do |w|
   w.name = "burning-bush"
   w.keepalive
   w.start = "su -l pi -c #{PROJECT_ROOT}/burning_bush_daemon"
+  w.log = PROJECT_ROOT + "/exec/daemon.log"
 end
